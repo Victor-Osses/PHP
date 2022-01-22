@@ -1,22 +1,24 @@
 <?php
 
-$nome = mysqli_escape_string($connect, $_POST['nome']);
-$sobrenome = mysqli_escape_string($connect, $_POST['sobrenome']);
-$email = mysqli_escape_string($connect, $_POST['email']);
-$idade = mysqli_escape_string($connect, $_POST['idade']);
-
-//Sanitizações
-sanitize('nome', FILTER_SANITIZE_SPECIAL_CHARS);
-sanitize('sobrenome', FILTER_SANITIZE_SPECIAL_CHARS);
-sanitize('email', FILTER_SANITIZE_EMAIL);
-sanitize('idade', FILTER_SANITIZE_NUMBER_INT);
+$nome = sanitize($_POST['nome']);
+$sobrenome = sanitize($_POST['sobrenome']);
+$email = sanitize($_POST['email']);
+$idade = sanitize($_POST['idade']);
  
 //Validações
 validate($email, FILTER_VALIDATE_EMAIL, "O email informado não é válido!");
 validate($idade, FILTER_VALIDATE_INT, "A idade informada não é válida!");
 
-function sanitize($name, $sanitize){
-    $$name = filter_input(INPUT_POST, $name, $sanitize);
+function sanitize($var){
+    global $connect;
+
+    //SQL injection
+    $var = mysqli_escape_string($connect, $var);
+
+    //XSS
+    $var = htmlspecialchars($var);
+
+    return $var;
 }
 
 function validate($var, $validate, $msg){
