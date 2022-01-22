@@ -40,12 +40,33 @@
                                 <td> ' . $cliente['email'] . '</td>
                                 <td> ' . $cliente['idade'] . '</td>
                                 <td><a href="editar.php?id=' . $cliente['id'] . '" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
-                                <td><a href="href="editar.php?id=' . $cliente['id'] . '" class="btn-floating red"><i class="material-icons">delete</i></a></td>
+                                <td><a href="#modal'.$cliente['id'].'" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
                                 </tr>';
+
+                                echo 
+                                '<div id="modal'. $cliente['id']. '" class="modal content">
+                                  <div class="modal-content">
+                                    <h4>Opa!</h4>
+                                    <p>Tem certeza que deseja excluir esse cliente?</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <form action="php_action/delete.php" method="POST">
+                                        <input type="hidden" name="id" value="'.$cliente['id'].'"></input>
+                                        <button type="submit" name="btn-deletar" class="btn red">SIM, QUERO DELETAR</button>
+                                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                    </form>
+                                  </div>
+                                </div>';
                             endwhile;
                             mysqli_close($connect);
                         else:
-                            echo "<h4>Nenhum cliente encontrado!<h4>";
+                            echo 
+                            "<tr>
+                                <td>-</td> 
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>";
                         endif;
                     ?>
                 </tbody>
