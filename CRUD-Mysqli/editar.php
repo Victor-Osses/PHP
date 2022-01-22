@@ -1,49 +1,35 @@
 <?php
-    //Sessão
-    session_start();
+    //Mensagem
+    include_once 'includes/mensagem.php';
 
     //Header
     include_once 'includes/header.php';
-
-    //Mensagem
-    include_once 'includes/mensagem.php';
 
     //Conexão
     include_once 'php_action/db_connect.php';
 
     if(isset($_GET['id'])):
-        $sql = "SELECT * FROM clientes WHERE id=" . $_GET['id'];
+        $id = mysqli_escape_string($connect, $_GET['id']);
+       
+        $sql = "SELECT * FROM clientes WHERE id=".$id ;
         $resultado = mysqli_query($connect, $sql);
-
+        
         if($resultado):
             $cliente = mysqli_fetch_array($resultado);
+        else:
+            header('Location: index.php');
         endif;
     else:
-        header('Location: ../index.php');
+        header('Location: index.php');
     endif;
 ?>
 
     <div class="row">
-        <!-- s12: 12 colunas para smartphones
-        m6: 6 colunas para tablets 
-        push-m3: preenche 3 colunas nas laterais para centralizar os elemtnos em tablets, visto que 6+3+3 =12 -->
         <div class="col s12 m8 push-m2">
             <h3 class="light">Editar Cliente</h3>
-            <?php
-                session_start();
-                if(!isset($_SESSION['erros'])):
-                    $_SESSION['erros'] = array();
-                endif;
-
-                if(count($_SESSION['erros']) > 0):
-                    foreach($_SESSION['erros'] as $erro):
-                        echo '<h5 class="col s12 red light">' . $erro . '</h5>';
-                    endforeach;
-                    $_SESSION['erros'] = array();
-                endif;
-            ?>
 
             <form action="php_action/update.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $cliente['id']; ?>">
                 <div class="input-field col s12">
                     <input type="text" name="nome" id="nome" value="<?php echo $cliente['nome']; ?>" required>
                     <!-- Colcar o id do input no for permite a animação do click no input -->
