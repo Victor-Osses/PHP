@@ -8,7 +8,7 @@
     $_POST - Array que contém informações enviadas via formulário POST
     $_GET - Array que contém informações enviadas via formulário GET
     $_FILES - Array que contém informações de arquivos enviados
-    $_COOKIE - 
+    $_COOKIE - Armazena informações localmente por um período X de tempo
     $_SESSION - Array que armazena informações e permite manipula-las entre páginas
 */
 

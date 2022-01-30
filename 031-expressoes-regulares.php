@@ -29,8 +29,8 @@ $padrao = "/^[a-z0-9]{1,4}$/i"; /*Válido de uma até quatro ocorrências de car
 $padrao = "/^[a-z0-9]{6}$/i"; /*Válido para até 6 ocorrências de caracteres do alfabeto 
 (maiúsculo ou minúsuculo) ou de números de 0 até 9*/
 $padrao = "/^[a-z0-9]?$/i"; //Válido para 0 ou 1 ocorrência de um caractere do alfabeto (maiúsculo ou minúsuculo) ou um número de 0 até 9
-$padrao = "/^[a-z0-9]?*/i"; //Válido para 0 ou muitas ocorrências
-$padrao = "/^[a-z0-9]?+/i"; //Válido para 1 ou muitas ocorrências. Só é inválido para strings vazias
+$padrao = "/^[a-z0-9]*$/i"; //Válido para 0 ou muitas ocorrências
+$padrao = "/^[a-z0-9]+$/i"; //Válido para 1 ou muitas ocorrências. Só é inválido para strings vazias
 
 //Aplica a expressão regular e retorna um bool se a string estiver dentro do padrão informado
 /*if(preg_match($padrao, $string)):
