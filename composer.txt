@@ -1,0 +1,89 @@
+**** COMPOSER VIA TERMINAL ****
+
+- O composer é um gerenciador de dependências do PHP
+
+- O composer pode ser instalado em https://getcomposer.org/
+
+- Para verificar se o composer foi instalado, digite no terminal: composer -v 
+
+- Para iniciar o composer, acesse seu projeto via terminar e digite: composer init
+
+- A principio, o composer vai solicitar algumas informações, vejo o exemplo:
+    Package name (<vendor>/<name>) [estudante de ti/crud_pdo_2]: teste/composer
+    Description []: Teste composer
+    Author [Victor Osses <v254373@dac.unicamp.br>, n to skip]: Victor Osses
+    Invalid author string.  Must be in the format: John Smith <john@example.com>
+    Author [Victor Osses <v254373@dac.unicamp.br>, n to skip]: Victor Osses <v254373@dac.unicamp.br>
+    Minimum Stability []: 
+    Package Type (e.g. library, project, metapackage, composer-plugin) []: 
+    License []: 
+
+- Feito isso, o composer irá solicitar que você informe as dependências do projeto, vejo no exemplo:
+    Define your dependencies.
+    Would you like to define your dependencies (require) interactively [yes]? yes
+
+- Você pode pesquisar por dependências em https://packagist.org/
+- Para instalar uma dependência, basta informar seu nome, tal como no exemplo:
+    Search for a package: dompdf/dompdf
+
+- O composer irá solicitar a versão, caso não informada, ele irá instalar a versão mais recente:
+    Enter the version constraint to require (or leave blank to use the latest version): 
+    Using version ^1.1 for dompdf/dompdf
+
+- O composer continuará perguntado por mais dependências. Caso não queira informar mais nenhuma: é só dar Enter
+
+- O composer irá perguntar se eu quero definir essas dependências para o ambiente de desenvolvimento:
+    Would you like to define your dev dependencies (require-dev) interactively [yes]? no
+
+- O composer pedirá confirmação para gerar o arquivo:
+    {
+    "name": "teste/composer",
+    "description": "Teste composer",
+    "require": {
+        "dompdf/dompdf": "^1.1"
+    },
+    "authors": [
+        {
+            "name": "Victor Osses",
+            "email": "v254373@dac.unicamp.br"
+        }
+    ]
+}
+
+Do you confirm generation [yes]? yes
+
+- O composer perguntará se você deseja instalar as dependências:
+    Would you like to install dependencies now [yes]? yes
+
+- Feito esses procedimentos, caso eu queira instalar uma nova dependência:
+    composer require nomeDependência
+
+- O arquivo composer.json conterá as informações do projeto, incluindo as dependências usadas
+
+- Para remover uma dependência do projeto, basta retirar a dependência do arquivo composer.json e executar:
+    composer update
+
+**** COMPOSER MANUALMENTE ****
+
+- Se eu quiser, posso criar um arquivo composer.json e colocar as dependências nele, tal como no exemplo a seguir:
+    {
+        "require": {
+            "cocur/slugify" : "4.1.0"
+        }
+    }
+
+- Feito isso, basta dar o seguinte comando para instalar as dependências:
+    composer install
+
+**** AUTOLOAD **** 
+- O autoload.php carrega automaticamente todas as classes de um certo diretório na memória
+- Para tanto, é necessário criar um arquivo composer.json com o seguinte conteúdo:
+    {
+        "autoload": {
+            "psr-4": {
+                "App\\": "App/"
+            }
+        }
+    }
+- Feito isso, é só abrir a pasta do projeto e dar o comando:
+    composer dump-autoload
